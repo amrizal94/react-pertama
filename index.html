@@ -34,7 +34,9 @@
       }
 
       const MyCounter = ({ text }) => (
-        <span style={{ margin: 20 }}>{text >= 0 ? text : "done!"}</span>
+        <span style={{ margin: 20 }}>
+          {text >= 0 && text <= 10 ? text : "done!"}
+        </span>
       );
 
       function MyApp() {

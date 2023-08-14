@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Pertama</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const div = document.getElementById("root");
+      const root = ReactDOM.createRoot(div);
+
+      function MyBotton({ text, onClick, counter }) {
+        const isDisabled =
+          text !== "Reset!"
+            ? counter >= 0 && counter <= 10
+              ? false
+              : true
+            : counter >= 0 && counter <= 10
+            ? true
+            : false;
+        const myStyle =
+          text !== "Reset!" ? {} : { margin: 20, display: "block" };
+        return (
+          <button onClick={onClick} disabled={isDisabled} style={myStyle}>
+            {text}
+          </button>
+        );
+      }
+
+      const MyCounter = ({ text }) => (
+        <span style={{ margin: 20 }}>{text >= 0 ? text : "done!"}</span>
+      );
+
+      function MyApp() {
+        const [counter, setCounter] = React.useState(0);
+
+        const decrement = () => setCounter(counter - 1);
+        const increment = () => setCounter(counter + 1);
+        const reset = () => setCounter(0);
+
+        return (
+          <div>
+            <MyBotton text={"-"} onClick={decrement} counter={counter} />
+            <MyCounter text={counter} />
+            <MyBotton text={"+"} onClick={increment} counter={counter} />
+            <MyBotton text={"Reset!"} onClick={reset} counter={counter} />
+          </div>
+        );
+      }
+
+      root.render(<MyApp />);
+    </script>
+  </body>
+</html>
